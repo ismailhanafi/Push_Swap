@@ -107,14 +107,14 @@ void	Radix(int *a, int *na, int *b, int *nb)
 	int	j;
 
 	size = *na;
-	bits = max_bits;
+	bits = max_bits(a, *na);
 	i = 0;
-	while (i < size)
+	while (i < bits)
 	{
 		j = 0;
 		while (j < size)
 		{
-			if ((a[0] >> i) && 1)
+			if ((a[0] >> i) & 1)
 				ra(a, *na);
 			else
 				pb(a, na, b, nb);
