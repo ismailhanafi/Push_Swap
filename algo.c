@@ -40,14 +40,12 @@ static void	push_back(int *a, int *na, int *b, int *nb)
 			pos++;
 		while (pos > 0 && pos <= *nb / 2)
 		{
-			rotate(b, *nb);
-			write(1, "rb\n", 3);
+			rb(b, *nb);
 			pos--;
 		}
 		while (pos > *nb / 2 && pos < *nb)
 		{
-			rev_rotate(b, *nb);
-			write(1, "rrb\n", 4);
+			rrb(b, *nb);
 			pos++;
 		}
 		pa(a, na, b, nb);
