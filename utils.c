@@ -1,28 +1,126 @@
 #include "push_swap.h"
 
-double	disorder(int *a, int n)
+int	is_sorted(int *a, int n)
+{
+	int     i;
+
+	i = 0;
+	while (i < n)
+	{
+		if (a[i] > a[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	count_numbers(int argc, char **argv)
 {
 	int	i;
 	int	j;
-	int	mistakes;
-	int	total_pairs;
+	int	count;
 
-	mistakes = 0;
-	total_pairs = 0;
-	i = 0;
-	while (i < n - 1)
+	count = 0;
+	i = 1;
+	while (i < argc)
 	{
-		j = i + 1;
+		j = 0;
+		while (argv[i][j])
+		{
+			while (argv[i][j] == ' ')
+				j++;
+			if (argv[i][j])
+ 				count++;
+			else
+				return (0);
+			while (argv[i][j] && argv[i][j] != ' ')
+				j++;
+		}
+		i++;
+	}
+	return (count);
+}
+
+int	has_value(int *a, int n, int value)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		if (a[i] == value)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+static int	read_number(char **s, long *n)
+{
+	int	sign;
+	int	digits;
+
+	sign = 1;
+	digits = 0;
+	*n = 0;
+	if (**s == '-' || **s == '+')
+	{
+		if (**s == '-')
+			sign = -1;
+		(*s)++;
+	}
+	while (**s >= '0' && **s <= '9')
+	{
+		*n = *n * 10 + (**s - '0');
+		if (sign == 1 && *n > INT_MAX)
+			return (0);
+		(*s)++;
+		digits++;
+	}
+	*n *= sign;
+	if (!digits || (**s && **s != ' '))
+		return (0);
+	return (*n >= INT_MIN && *n <= INT_MAX);
+}
+
+int     parse_arg(char *s, int *a, int *n)
+{
+	long	num;
+
+	while (*s == ' ')
+		s++;
+	if (!read_number(&s, &num) || has_value(a, *n, num))
+		return (0);
+	while (*s == ' ')
+		s++;
+	if (*s)
+		return (0);
+	a[(*n)++] = num;
+	return (1);
+}
+
+void	set_index(int *a, int *tmp, int n)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < n)
+	{
+		tmp[i] = 0;
+		j = 0;
 		while (j < n)
 		{
-			total_pairs++;
-			if (a[i] > a[j])
-				mistakes++;
+			if (a[j] < a[i])
+				tmp[i]++;
 			j++;
 		}
 		i++;
 	}
-	if (total_pairs == 0)
-		return (0);
-	return ((double)(mistakes / total_pairs));
+	i = 0;
+	while (i < n)
+	{
+		a[i] = tmp[i];
+		i++;
+	}
 }
