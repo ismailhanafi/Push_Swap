@@ -44,5 +44,5 @@ void    rrb(int *b, int nb)
 {
     rev_rotate(b, nb);
     write(1, "rrb\n", 4);
-}
 
+}

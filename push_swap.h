@@ -6,10 +6,11 @@
 # include <limits.h>
 
 /* ============Utils============= */
-int		count_numbers(int argc, char **argv);
+int		counter(int argc, char **argv);
 int		has_value(int *a, int n, int value);
-int		parse_arg(char *s, int *a, int *n);
-void	set_index(int *a, int *tmp, int n);
+int		parsing(char *s, int *a, int *n);
+void	rank(int *a, int *tmp, int n);
+int		is_sorted(int *a, int n);
 
 /* ============Operation============= */
 void	swap(int *s, int n);
@@ -28,7 +29,7 @@ void    rrb(int *b, int nb);
 /* ============Algorithems============= */
 void	selection_sort(int *a, int *na, int *b, int *nb);
 void	chunk_sort(int *a, int *na, int *b, int *nb);
-int		is_sorted(int *a, int n);
+void	radix_sort(int *a, int *na, int *b, int *nb);
 
 void	sort(int *a, int *na, int *b, int *nb);
 

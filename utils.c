@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iel-hana <iel-hana@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/25 14:03:07 by iel-hana          #+#    #+#             */
+/*   Updated: 2026/11/25 14:09:32 by iel-hana         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	is_sorted(int *a, int n)
 {
-	int     i;
+	int	i;
 
 	i = 0;
-	while (i < n)
+	while (i < n - 1)
 	{
 		if (a[i] > a[i + 1])
 			return (0);
@@ -14,7 +26,7 @@ int	is_sorted(int *a, int n)
 	return (1);
 }
 
-int	count_numbers(int argc, char **argv)
+int	counter(int argc, char **argv)
 {
 	int	i;
 	int	j;
@@ -30,7 +42,7 @@ int	count_numbers(int argc, char **argv)
 			while (argv[i][j] == ' ')
 				j++;
 			if (argv[i][j])
- 				count++;
+				count++;
 			else
 				return (0);
 			while (argv[i][j] && argv[i][j] != ' ')
@@ -41,7 +53,7 @@ int	count_numbers(int argc, char **argv)
 	return (count);
 }
 
-int	has_value(int *a, int n, int value)
+static int	antidup(int *a, int n, int value)
 {
 	int	i;
 
@@ -49,13 +61,13 @@ int	has_value(int *a, int n, int value)
 	while (i < n)
 	{
 		if (a[i] == value)
-			return (1);
+			return (0);
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
-static int	read_number(char **s, long *n)
+static int	read_num(char **s, long *n)
 {
 	int	sign;
 	int	digits;
@@ -83,13 +95,13 @@ static int	read_number(char **s, long *n)
 	return (*n >= INT_MIN && *n <= INT_MAX);
 }
 
-int     parse_arg(char *s, int *a, int *n)
+int	parsing(char *s, int *a, int *n)
 {
 	long	num;
 
 	while (*s == ' ')
 		s++;
-	if (!read_number(&s, &num) || has_value(a, *n, num))
+	if (!read_num(&s, &num) || !antidup(a, *n, num))
 		return (0);
 	while (*s == ' ')
 		s++;
@@ -99,7 +111,7 @@ int     parse_arg(char *s, int *a, int *n)
 	return (1);
 }
 
-void	set_index(int *a, int *tmp, int n)
+void	rank(int *a, int *tmp, int n)
 {
 	int	i;
 	int	j;

@@ -1,33 +1,33 @@
 #include "push_swap.h"
 
 /*=================selection_sort=================================*/
-void	Selection(int *arr, int size)
+void	selection_sort(int *a, int *na, int *b, int *nb)
 {
-	int	i;
-	int	j;
-	int	min;
-	int	tmp;
+	int	total;
+	int	pos;
 
-	i = 0;
-	while (i < size - 1)
-	{`
-		min = i;
-		j = i + 1;
-		while (j < size)
+	total = *na;
+	while (*na > 0)
+	{
+		pos = 0;
+		while (a[pos] != total - *na)
+			pos++;
+		while (pos > 0 && pos <= *na / 2)
 		{
-			if (arr[j] < arr[min])
-				min = j;
-			j++;
+			ra(a, *na);
+			pos--;
 		}
-		if (min != i)
+		while (pos > *na / 2 && pos < *na)
 		{
-			tmp = arr[i];
-			arr[i] = arr[min];
-			arr[min] = tmp;
+			rra(a, *na);
+			pos++;
 		}
-		i++;
+		pb(a, na, b, nb);
 	}
+	while (*nb > 0)
+		pa(a, na, b, nb);
 }
+
 /*=================chunk_sort=================================*/
 static void	push_back(int *a, int *na, int *b, int *nb)
 {
@@ -69,35 +69,15 @@ void	chunk_sort(int *a, int *na, int *b, int *nb)
 		{
 			pb(a, na, b, nb);
 			if (b[0] <= pushed && *nb > 1)
-				rb(b, nb);
+				rb(b, *nb);
 			pushed++;
 		}
 	}
 	push_back(a, na, b, nb);
 }
 
-/*=================radix_sort=================================*/
-static int	max_bits(int *a, int n)
-{
-	int	max;
-	int	bits;
-	int	i;
-
-	max = a[0];
-	i = 1;
-	while (i < n)
-	{
-		if (a[i] > max)
-			max = a[i];
-		i++;
-	}
-	bits = 0;
-	while (max >> bits)
-		bits++;
-	return (bits);
-}
-
-void	Radix(int *a, int *na, int *b, int *nb)
+/*=================radix_sort=====================================*/
+void	radix_sort(int *a, int *na, int *b, int *nb)
 {
 	int	size;
 	int	bits;
@@ -105,7 +85,9 @@ void	Radix(int *a, int *na, int *b, int *nb)
 	int	j;
 
 	size = *na;
-	bits = max_bits(a, *na);
+	bits = 0;
+	while ((size - 1) >> bits)
+		bits++;
 	i = 0;
 	while (i < bits)
 	{
@@ -122,4 +104,15 @@ void	Radix(int *a, int *na, int *b, int *nb)
 			pa(a, na, b, nb);
 		i++;
 	}
+}
+
+/*=================main===========================================*/
+void	sort(int *a, int *na, int *b, int *nb)
+{
+	if (*na <= 20)
+		selection_sort(a, na, b, nb);
+	else if (*na <= 100)
+		chunk_sort(a, na, b, nb);
+	else
+		radix_sort(a, na, b, nb);
 }
