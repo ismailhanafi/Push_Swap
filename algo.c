@@ -6,7 +6,7 @@
 /*   By: iel-hana <iel-hana@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/26 13:54:19 by iel-hana          #+#    #+#             */
-/*   Updated: 2026/11/26 13:54:27 by iel-hana         ###   ########.fr       */
+/*   Updated: 2026/11/26 14:43:41 by iel-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,11 @@ void	selection_sort(int *a, int *na, int *b, int *nb)
 			i++;
 		}
 		if (min <= *na / 2)
-		{
-			while (min > 0)
-			{
+			while (min-- > 0)
 				ra(a, *na);
-				min--;
-			}
-		}
 		else
-		{
-			while (min < *na)
-			{
+			while (min++ < *na)
 				rra(a, *na);
-				min++;
-			}
-		}
 		pb(a, na, b, nb);
 	}
 	while (*nb > 0)
