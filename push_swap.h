@@ -6,11 +6,11 @@
 # include <limits.h>
 
 /* ============Utils============= */
-int		counter(int argc, char **argv);
 int		has_value(int *a, int n, int value);
 int		parsing(char *s, int *a, int *n);
 void	rank(int *a, int *tmp, int n);
 int		is_sorted(int *a, int n);
+int	ft_strcmp(const char *s1, const char *s2);
 
 /* ============Operation============= */
 void	swap(int *s, int n);

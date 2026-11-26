@@ -3,24 +3,34 @@
 /*=================selection_sort=================================*/
 void	selection_sort(int *a, int *na, int *b, int *nb)
 {
-	int	total;
-	int	pos;
+	int	i;
+	int	min;
 
-	total = *na;
 	while (*na > 0)
 	{
-		pos = 0;
-		while (a[pos] != total - *na)
-			pos++;
-		while (pos > 0 && pos <= *na / 2)
+		i = 0;
+		min = 0;
+		while (i < *na)
 		{
-			ra(a, *na);
-			pos--;
+			if (a[i] < a[min])
+				min = i;
+			i++;
 		}
-		while (pos > *na / 2 && pos < *na)
+		if (min <= *na / 2)
 		{
-			rra(a, *na);
-			pos++;
+    			while (min > 0)
+    			{
+        			ra(a, *na);
+        			min--;
+    			}
+		}
+		else
+		{
+    			while (min < *na)
+    			{
+        			rra(a, *na);
+        			min++;
+    			}
 		}
 		pb(a, na, b, nb);
 	}

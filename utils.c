@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: iel-hana <iel-hana@student.1337.ma>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/11/25 14:03:07 by iel-hana          #+#    #+#             */
-/*   Updated: 2026/11/25 14:09:32 by iel-hana         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
 
 int	is_sorted(int *a, int n)
@@ -26,31 +14,14 @@ int	is_sorted(int *a, int n)
 	return (1);
 }
 
-int	counter(int argc, char **argv)
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	int	i;
-	int	j;
-	int	count;
 
-	count = 0;
-	i = 1;
-	while (i < argc)
-	{
-		j = 0;
-		while (argv[i][j])
-		{
-			while (argv[i][j] == ' ')
-				j++;
-			if (argv[i][j])
-				count++;
-			else
-				return (0);
-			while (argv[i][j] && argv[i][j] != ' ')
-				j++;
-		}
+	i = 0;
+	while (s1[i] == s2[i] && s1[i])
 		i++;
-	}
-	return (count);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
 static int	antidup(int *a, int n, int value)
