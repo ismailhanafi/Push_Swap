@@ -11,6 +11,7 @@ int		parsing(char *s, int *a, int *n);
 void	rank(int *a, int *tmp, int n);
 int		is_sorted(int *a, int n);
 int	ft_strcmp(const char *s1, const char *s2);
+double	disorder(int *a, int n);
 
 /* ============Operation============= */
 void	swap(int *s, int n);

@@ -31,6 +31,14 @@ static int	all_in_one(int argc, char **argv, int *a, int start)
 	return (1);
 }
 
+static int	fail(int *a, int *b)
+{
+	free(a);
+	free(b);
+	write(2, "error\n", 6);
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	int	*a;
@@ -49,12 +57,7 @@ int	main(int argc, char **argv)
 	b = malloc(na * sizeof(int));
 	nb = 0; 
 	if (na == 0 || !a || !b || !all_in_one(argc, argv, a, start))
-	{
-		free(a);
-		free(b);
-		write(2, "Error\n", 6);
-		return (1);
-	}
+		return (fail(a, b));
 	rank(a, b, na);
 	if (!is_sorted(a, na))
 	{
