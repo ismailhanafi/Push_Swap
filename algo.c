@@ -119,9 +119,12 @@ void	radix_sort(int *a, int *na, int *b, int *nb)
 /*=================main===========================================*/
 void	sort(int *a, int *na, int *b, int *nb)
 {
-	if (*na <= 20)
+	double	order;
+
+	order = disorder(a, *na);
+	if (order < 0.2)
 		selection_sort(a, na, b, nb);
-	else if (*na <= 100)
+	else if (order <= 0.2 && order > 0.5)
 		chunk_sort(a, na, b, nb);
 	else
 		radix_sort(a, na, b, nb);
