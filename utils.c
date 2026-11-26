@@ -82,7 +82,7 @@ static int	read_num(char **s, long *n)
 	while (**s >= '0' && **s <= '9')
 	{
 		*n = *n * 10 + (**s - '0');
-		if (sign == 1 && *n > INT_MAX)
+		if (*n > (long)INT_MAX + 1)
 			return (0);
 		(*s)++;
 		digits++;

@@ -35,7 +35,7 @@ static int	fail(int *a, int *b)
 {
 	free(a);
 	free(b);
-	write(2, "error\n", 6);
+	write(2, "Error\n", 6);
 	return (1);
 }
 
@@ -46,12 +46,16 @@ int	main(int argc, char **argv)
 	int	na;
 	int	nb;
 	int	start;
+	int	algo;
 
 	if (argc < 2)
 		return (0);
+	algo = handle_flag(argv[1]);
+	if (algo < 0)
+		return (fail(NULL, NULL));
 	start = 1;
-	if (argv[1][0] == '-')
-	start = 2;
+	if (algo > 0)
+		start = 2;
 	na = argc - start;
 	a = malloc(na * sizeof(int));
 	b = malloc(na * sizeof(int));
