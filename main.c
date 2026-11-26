@@ -1,30 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iel-hana <iel-hana@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/26 13:52:17 by iel-hana          #+#    #+#             */
+/*   Updated: 2026/11/26 14:19:18 by iel-hana         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-static int  handle_flag(char *s)   /* 0 none, 1-4 algo, -1 unknown */
-{
-	if (!ft_strcmp(s, "--simple"))
-		return (1);
-	if (!ft_strcmp(s, "--medium"))
-		return (2);
-	if (!ft_strcmp(s, "--complex"))
-		return (3);
-	if (!ft_strcmp(s, "--adaptive"))
-		return (4);
-	if (s[0] == '-' && s[1] == '-')
-		return (-1);
-	return (0);
-}
-
-static int	all_in_one(int argc, char **argv, int *a, int start)
+static int	all_in_one(int count, char **argv, int *a, int *na)
 {
 	int	i;
-	int	n;
 
-	n = 0;
-	i = start;
-	while (i < argc)
+	i = 0;
+	while (i < count)
 	{
-		if (!parsing(argv[i], a, &n))
+		if (!parsing(argv[i], a, na))
 			return (0);
 		i++;
 	}
@@ -39,13 +34,44 @@ static int	fail(int *a, int *b)
 	return (1);
 }
 
-int	main(int argc, char **argv)
+static void	choose(int algo, int *a, int *b, int n)
+{
+	int	nb;
+
+	nb = 0;
+	if (algo == 1)
+		selection_sort(a, &n, b, &nb);
+	else if (algo == 2)
+		chunk_sort(a, &n, b, &nb);
+	else if (algo == 3)
+		radix_sort(a, &n, b, &nb);
+	else
+		sort(a, &n, b, &nb);
+}
+
+static int	run_it(int algo, char **args, int count)
 {
 	int	*a;
 	int	*b;
 	int	na;
 	int	nb;
-	int	start;
+
+	a = malloc(count * sizeof(int));
+	b = malloc(count * sizeof(int));
+	nb = 0;
+	na = 0;
+	if (!a || !b || !all_in_one(count, args, a, &na))
+		return (fail(a, b));
+	rank(a, b, na);
+	if (!is_sorted(a, na))
+		choose(algo, a, b, na);
+	free(a);
+	free(b);
+	return (0);
+}
+
+int	main(int argc, char **argv)
+{
 	int	algo;
 
 	if (argc < 2)
@@ -53,30 +79,7 @@ int	main(int argc, char **argv)
 	algo = handle_flag(argv[1]);
 	if (algo < 0)
 		return (fail(NULL, NULL));
-	start = 1;
 	if (algo > 0)
-		start = 2;
-	na = argc - start;
-	a = malloc(na * sizeof(int));
-	b = malloc(na * sizeof(int));
-	nb = 0; 
-	if (na == 0 || !a || !b || !all_in_one(argc, argv, a, start))
-		return (fail(a, b));
-	rank(a, b, na);
-	if (!is_sorted(a, na))
-	{
-		if (argc > 1 && argv[1][0] == '-')
-		{
-			if (!handle_flag(argv[1]))
-			{
-				write(2, "Error\n", 6);
-				return (1);
-			}
-		}
-		else
-			sort(a, &na, b, &nb);
-	}
-	free(a);
-	free(b);
-	return (0);
+		return (run_it(algo, argv + 2, argc - 2));
+	return (run_it(algo, argv + 1, argc - 1));
 }
