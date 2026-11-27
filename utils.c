@@ -65,6 +65,8 @@ int	ft_strcmp(const char *s1, const char *s2)
 
 int	handle_flag(char *s)
 {
+	if (!ft_strcmp(s, "--bench"))
+		return (9);
 	if (!ft_strcmp(s, "--simple"))
 		return (1);
 	if (!ft_strcmp(s, "--medium"))

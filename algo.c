@@ -121,12 +121,12 @@ void	radix_sort(int *a, int *na, int *b, int *nb)
 /*=================main===========================================*/
 void	sort(int *a, int *na, int *b, int *nb)
 {
-	double	order;
+	t_strategy	strategy;
 
-	order = disorder(a, *na);
-	if (order < 0.2)
+	strategy = bench_get()->strategy;
+	if (strategy == str_simple)
 		selection_sort(a, na, b, nb);
-	else if (order < 0.5)
+	else if (strategy == str_medium)
 		chunk_sort(a, na, b, nb);
 	else
 		radix_sort(a, na, b, nb);

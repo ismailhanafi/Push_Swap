@@ -49,22 +49,23 @@ static void	choose(int algo, int *a, int *b, int n)
 		sort(a, &n, b, &nb);
 }
 
-static int	run_it(int algo, char **args, int count)
+static int	run_it(int algo, int bench, char **args, int count)
 {
 	int	*a;
 	int	*b;
 	int	na;
-	int	nb;
 
 	a = malloc(count * sizeof(int));
 	b = malloc(count * sizeof(int));
-	nb = 0;
 	na = 0;
 	if (!a || !b || !all_in_one(count, args, a, &na))
 		return (fail(a, b));
+	benchmark_init(a, na, algo - 1);
 	rank(a, b, na);
 	if (!is_sorted(a, na))
 		choose(algo, a, b, na);
+	if (bench)
+		benchmark_report();
 	free(a);
 	free(b);
 	return (0);
@@ -73,13 +74,27 @@ static int	run_it(int algo, char **args, int count)
 int	main(int argc, char **argv)
 {
 	int	algo;
+	int	i;
+	int	bench;
+	int	flag;
 
 	if (argc < 2)
 		return (0);
-	algo = handle_flag(argv[1]);
-	if (algo < 0)
-		return (fail(NULL, NULL));
-	if (algo > 0)
-		return (run_it(algo, argv + 2, argc - 2));
-	return (run_it(algo, argv + 1, argc - 1));
+	algo = 4;
+	bench = 0;
+	i = 1;
+	while (i < argc)
+	{
+		flag = handle_flag(argv[i]);
+		if (flag == 0)
+			break ;
+		if (flag < 0)
+			return (fail(NULL, NULL));
+		if (flag == 9)
+			bench = 1;
+		else
+			algo = flag;
+		i++;
+	}
+	return (run_it(algo, bench, argv + i, argc - i));
 }

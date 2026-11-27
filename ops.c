@@ -18,28 +18,33 @@ void	pb(int *a, int *na, int *b, int *nb)
 		return ;
 	push(a, na, b, nb);
 	write(1, "pb\n", 3);
+	benchmark_record(op_pb);
 }
 
 void	ra(int *a, int na)
 {
 	rotate(a, na);
 	write(1, "ra\n", 3);
+	benchmark_record(op_ra);
 }
 
 void	rb(int *b, int nb)
 {
 	rotate(b, nb);
 	write(1, "rb\n", 3);
+	benchmark_record(op_rb);
 }
 
 void	rra(int *a, int na)
 {
 	rev_rotate(a, na);
 	write(1, "rra\n", 4);
+	benchmark_record(op_rra);
 }
 
 void	rrb(int *b, int nb)
 {
 	rev_rotate(b, nb);
 	write(1, "rrb\n", 4);
+	benchmark_record(op_rrb);
 }

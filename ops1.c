@@ -16,6 +16,7 @@ void	sa(int *a, int na)
 {
 	swap(a, na);
 	write(1, "sa\n", 3);
+	benchmark_record(op_sa);
 }
 
 void	pa(int *a, int *na, int *b, int *nb)
@@ -24,4 +25,5 @@ void	pa(int *a, int *na, int *b, int *nb)
 		return ;
 	push(b, nb, a, na);
 	write(1, "pa\n", 3);
+	benchmark_record(op_pa);
 }

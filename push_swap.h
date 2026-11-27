@@ -16,6 +16,46 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include "ft_printf/ft_printf.h"
+
+typedef enum e_strategy
+{
+	str_simple,
+	str_medium,
+	str_complex,
+	str_adaptive
+}	t_strategy;
+
+typedef enum e_operation
+{
+	op_sa,
+	op_sb,
+	op_ss,
+	op_pa,
+	op_pb,
+	op_ra,
+	op_rb,
+	op_rr,
+	op_rra,
+	op_rrb,
+	op_rrr,
+	op_count
+}	t_operation;
+
+typedef struct s_bench
+{
+	double		disorder;
+	t_strategy	requested;
+	t_strategy	strategy;
+	int			operations[11];
+	int			total;
+}	t_bench;
+
+/* ============Bench============= */
+t_bench	*bench_get(void);
+void	benchmark_init(int *a, int n, t_strategy requested);
+void	benchmark_record(t_operation op);
+void	benchmark_report(void);
 
 /* ============Utils============= */
 int		parsing(char *s, int *a, int *n);
