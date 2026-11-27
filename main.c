@@ -88,7 +88,7 @@ int	main(int argc, char **argv)
 		flag = handle_flag(argv[i]);
 		if (flag == 0)
 			break ;
-		if (flag < 0 || (i == 2 && flag == 9 && bench))
+		if (flag < 0 || (i == 2 && ((flag == 9) == bench)))
 			return (fail(NULL, NULL));
 		if (flag == 9)
 			bench = 1;
