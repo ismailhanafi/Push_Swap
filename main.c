@@ -83,12 +83,12 @@ int	main(int argc, char **argv)
 	algo = 4;
 	bench = 0;
 	i = 1;
-	while (i < argc)
+	while (i < argc && i < 3)
 	{
 		flag = handle_flag(argv[i]);
 		if (flag == 0)
 			break ;
-		if (flag < 0)
+		if (flag < 0 || (i == 2 && (flag == 9) == bench))
 			return (fail(NULL, NULL));
 		if (flag == 9)
 			bench = 1;
