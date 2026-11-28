@@ -23,6 +23,8 @@ void	pb(int *a, int *na, int *b, int *nb)
 
 void	ra(int *a, int na)
 {
+	if (na < 2)
+		return ;
 	rotate(a, na);
 	write(1, "ra\n", 3);
 	benchmark_record(op_ra);
@@ -30,6 +32,8 @@ void	ra(int *a, int na)
 
 void	rb(int *b, int nb)
 {
+	if (nb < 2)
+		return ;
 	rotate(b, nb);
 	write(1, "rb\n", 3);
 	benchmark_record(op_rb);
@@ -37,6 +41,8 @@ void	rb(int *b, int nb)
 
 void	rra(int *a, int na)
 {
+	if (na < 2)
+		return ;
 	rev_rotate(a, na);
 	write(1, "rra\n", 4);
 	benchmark_record(op_rra);
@@ -44,6 +50,8 @@ void	rra(int *a, int na)
 
 void	rrb(int *b, int nb)
 {
+	if (nb < 2)
+		return ;
 	rev_rotate(b, nb);
 	write(1, "rrb\n", 4);
 	benchmark_record(op_rrb);

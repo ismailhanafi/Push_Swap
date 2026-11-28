@@ -50,7 +50,7 @@ static void	push_back(int *a, int *na, int *b, int *nb)
 		pos = 0;
 		while (b[pos] != *nb - 1)
 			pos++;
-		while (pos > 0 && pos <= *nb / 2)
+		while (pos <= *nb / 2 && pos > 0)
 		{
 			rb(b, *nb);
 			pos--;
@@ -70,8 +70,8 @@ void	chunk_sort(int *a, int *na, int *b, int *nb)
 	int	chunk;
 
 	pushed = 0;
-	chunk = 0;
-	while ((chunk + 1) * (chunk + 1) <= *na)
+	chunk = 1;
+	while (chunk * chunk < *na)
 		chunk++;
 	while (*na > 0)
 	{
@@ -80,7 +80,7 @@ void	chunk_sort(int *a, int *na, int *b, int *nb)
 		else
 		{
 			pb(a, na, b, nb);
-			if (b[0] <= pushed && *nb > 1)
+			if (b[0] <= pushed)
 				rb(b, *nb);
 			pushed++;
 		}

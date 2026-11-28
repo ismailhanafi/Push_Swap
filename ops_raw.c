@@ -12,17 +12,6 @@
 
 #include "push_swap.h"
 
-void	swap(int *s, int n)
-{
-	int	tmp;
-
-	if (n < 2)
-		return ;
-	tmp = s[0];
-	s[0] = s[1];
-	s[1] = tmp;
-}
-
 void	push(int *from, int *nfrom, int *to, int *nto)
 {
 	int	i;
@@ -78,4 +67,13 @@ void	rev_rotate(int *s, int n)
 		i--;
 	}
 	s[0] = last;
+}
+
+void	pa(int *a, int *na, int *b, int *nb)
+{
+	if (*nb == 0)
+		return ;
+	push(b, nb, a, na);
+	write(1, "pa\n", 3);
+	benchmark_record(op_pa);
 }

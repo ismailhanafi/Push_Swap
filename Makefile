@@ -1,7 +1,7 @@
 NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRCS = main.c utils.c ops_raw.c ops.c ops1.c pars.c algo.c bench.c \
+SRCS = main.c utils.c ops_raw.c ops.c pars.c algo.c bench.c \
        ft_printf/ft_printf.c \
        ft_printf/ft_printf_char.c \
        ft_printf/ft_printf_hex.c \
