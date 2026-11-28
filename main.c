@@ -55,6 +55,8 @@ static int	run_it(int algo, int bench, char **args, int count)
 	int	*b;
 	int	na;
 
+	if (count <= 0)
+		return (0);
 	a = malloc(count * sizeof(int));
 	b = malloc(count * sizeof(int));
 	na = 0;
